@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Supervivencia Universitaria</title>
+    
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Configuración de Fuente (Inter) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            DEFAULT: '#4f46e5', // Indigo-600
+                            hover: '#4338ca', // Indigo-700
+                            light: '#eef2ff', // Indigo-50
+                        },
+                        secondary: {
+                            DEFAULT: '#10b981', // Emerald-500
+                            hover: '#059669', // Emerald-600
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Estilos base -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- ==== CABECERA Y NAVEGACIÓN ==== -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo/Título del Sitio -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-2xl font-bold text-primary-DEFAULT">
+                        <!-- Icono SVG simple -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 inline-block -mt-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3.5a1 1 0 00.788 1.84L10 5.394l6.606 2.026a1 1 0 10.788-1.84l-7-3.5z" />
+                            <path d="M10 6.545l-7 3.5V18a1 1 0 001 1h12a1 1 0 001-1v-7.955l-7-3.5zM7 16v-5h6v5H7z" />
+                        </svg>
+                        Guía Universitaria
+                    </span>
+                </div>
+
+                <!-- Navegación de Escritorio -->
+                <div class="hidden md:flex md:items-center md:space-x-4">
+                    <a href="#" onclick="showPage('page-inicio'); return false;" class="nav-link text-primary-DEFAULT font-medium px-3 py-2 rounded-md">Inicio</a>
+                    <a href="#" onclick="showPage('page-recursos'); return false;" class="nav-link text-gray-600 hover:text-primary-DEFAULT hover:bg-primary-light px-3 py-2 rounded-md transition-colors duration-200">Recursos Académicos</a>
+                    <a href="#" onclick="showPage('page-campus'); return false;" class="nav-link text-gray-600 hover:text-primary-DEFAULT hover:bg-primary-light px-3 py-2 rounded-md transition-colors duration-200">Vida en el Campus</a>
+                    <a href="#" onclick="showPage('page-bienestar'); return false;" class="nav-link text-gray-600 hover:text-primary-DEFAULT hover:bg-primary-light px-3 py-2 rounded-md transition-colors duration-200">Bienestar y Consejos</a>
+                </div>
+
+                <!-- Botón de Menú Móvil -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 hover:text-primary-DEFAULT hover:bg-primary-light focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-DEFAULT" aria-expanded="false">
+                        <span class="sr-only">Abrir menú</span>
+                        <!-- Icono Hamburguesa -->
+                        <svg id="menu-icon-open" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                        <!-- Icono 'X' (cerrar) -->
+                        <svg id="menu-icon-close" class="h-6 w-6 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Menú Móvil (desplegable) -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" onclick="showPage('page-inicio'); toggleMenu(); return false;" class="nav-link-mobile text-primary-DEFAULT font-medium block px-3 py-2 rounded-md">Inicio</a>
+                <a href="#" onclick="showPage('page-recursos'); toggleMenu(); return false;" class="nav-link-mobile text-gray-600 hover:text-primary-DEFAULT hover:bg-primary-light block px-3 py-2 rounded-md transition-colors duration-200">Recursos Académicos</a>
+                <a href="#" onclick="showPage('page-campus'); toggleMenu(); return false;" class="nav-link-mobile text-gray-600 hover:text-primary-DEFAULT hover:bg-primary-light block px-3 py-2 rounded-md transition-colors duration-200">Vida en el Campus</a>
+                <a href="#" onclick="showPage('page-bienestar'); toggleMenu(); return false;" class="nav-link-mobile text-gray-600 hover:text-primary-DEFAULT hover:bg-primary-light block px-3 py-2 rounded-md transition-colors duration-200">Bienestar y Consejos</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==== CONTENEDOR PRINCIPAL DE PÁGINAS ==== -->
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- ===== PÁGINA 1: INICIO ===== -->
+        <section id="page-inicio" class="page-content">
+            <!-- Sección Hero -->
+            <!-- CAMBIO: 'from-primary-DEFAULT' cambiado a 'from-indigo-600' para asegurar la carga del color -->
+            <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 text-white rounded-xl shadow-2xl p-8 md:p-16 text-center my-6 overflow-hidden">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Guía de Supervivencia</h1>
+                <h2 class="text-3xl md:text-5xl font-semibold mb-6">Tu Primer Año Universitario</h2>
+                <!-- CAMBIO: 'text-indigo-100' cambiado a 'text-indigo-200' para mejor contraste -->
+                <p class="text-lg md:text-xl text-indigo-200 max-w-3xl mx-auto">
+                    ¡Bienvenido/a! Empezar la universidad es un gran desafío. Esta guía te dará los mejores consejos y recursos para navegar tu primer año con éxito.
+                </p>
+            </div>
+
+            <!-- Sección de Botones de Navegación -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 my-12">
+                <!-- Tarjeta 1: Recursos -->
+                <a href="#" onclick="showPage('page-recursos'); return false;" class="nav-card-link group block bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transform transition-all duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 bg-primary-light rounded-full mb-6 group-hover:bg-primary-DEFAULT transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-DEFAULT group-hover:text-white transition-colors duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.667 0 3.218.52 4.5 1.405A7.969 7.969 0 0114.5 14c1.255 0 2.443-.29 3.5-.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Recursos Académicos</h3>
+                    <p class="text-gray-600 mb-4">Tips de estudio, plataformas clave y cómo hablar con tus profesores.</p>
+                    <span class="font-medium text-primary-DEFAULT group-hover:text-primary-hover">Ver más &rarr;</span>
+                </a>
+                
+                <!-- Tarjeta 2: Campus -->
+                <a href="#" onclick="showPage('page-campus'); return false;" class="nav-card-link group block bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transform transition-all duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 bg-primary-light rounded-full mb-6 group-hover:bg-primary-DEFAULT transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-DEFAULT group-hover:text-white transition-colors duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Vida en el Campus</h3>
+                    <p class="text-gray-600 mb-4">Actividades, clubes, deportes y cómo ubicar las instalaciones clave.</p>
+                    <span class="font-medium text-primary-DEFAULT group-hover:text-primary-hover">Explorar &rarr;</span>
+                </a>
+
+                <!-- Tarjeta 3: Bienestar -->
+                <a href="#" onclick="showPage('page-bienestar'); return false;" class="nav-card-link group block bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.03] transform transition-all duration-300">
+                    <div class="flex items-center justify-center h-16 w-16 bg-primary-light rounded-full mb-6 group-hover:bg-primary-DEFAULT transition-colors duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-DEFAULT group-hover:text-white transition-colors duration-300" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Bienestar y Consejos</h3>
+                    <p class="text-gray-600 mb-4">Manejo del tiempo, salud mental y los mejores consejos de 'veteranos'.</p>
+                    <span class="font-medium text-primary-DEFAULT group-hover:text-primary-hover">Aprender &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- ===== PÁGINA 2: RECURSOS ACADÉMICOS ===== -->
+        <section id="page-recursos" class="page-content hidden">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-8 border-b-4 border-primary-DEFAULT pb-4">Recursos Académicos</h1>
+            
+            <!-- Sub-sección: Tips de Estudio -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Tips de Estudio: De Sobrevivir a Sobresalir</h2>
+                    <p class="text-lg text-gray-600 mb-6">Estudiar en la universidad es diferente. La clave no es memorizar, sino entender. Aquí algunas técnicas probadas:</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <!-- Card: Pomodoro -->
+                        <div class="bg-primary-light p-6 rounded-lg">
+                            <h4 class="text-xl font-semibold text-primary-DEFAULT mb-2">Técnica Pomodoro</h4>
+                            <p class="text-gray-700">Estudia intensamente 25 min, descansa 5. Tras 4 ciclos, descansa 20 min. Mantiene tu cerebro fresco.</p>
+                        </div>
+                        <!-- Card: Mapas Mentales -->
+                        <div class="bg-primary-light p-6 rounded-lg">
+                            <h4 class="text-xl font-semibold text-primary-DEFAULT mb-2">Mapas Mentales y Resúmenes</h4>
+                            <p class="text-gray-700">Crea resúmenes con tus propias palabras. Te fuerza a procesar y organizar la información.</p>
+                        </div>
+                        <!-- Card: Enseña -->
+                        <div class="bg-primary-light p-6 rounded-lg">
+                            <h4 class="text-xl font-semibold text-primary-DEFAULT mb-2">Enseña lo que Aprendes</h4>
+                            <p class="text-gray-700">Intenta explicarle un tema a un compañero. Si puedes hacerlo simple, realmente lo entendiste.</p>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Recurso Recomendado:</h4>
+                    <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md">
+                        <!-- Video actualizado con el enlace solicitado -->
+                        <iframe class="w-full h-full" 
+                                src="https://www.youtube.com/watch?v=2iGNEak6PE4" 
+                                title="3 MÉTODOS para TOMAR NOTAS o APUNTES en el Estudio (Paso a Paso) | Técnicas de Estudio #7" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                    <!-- He borrado el párrafo <p> que estaba aquí, ya que no es necesario -->
+                </div>
+            </div>
+
+            <!-- Sub-sección: Plataformas Clave -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Tus Herramientas Digitales Esenciales</h2>
+                    <ul class="space-y-4 text-lg text-gray-700 list-disc list-inside mb-6">
+                        <li><b>Campus Virtual (LMS):</b> Aquí vives académicamente. Tareas, avisos, calificaciones. ¡Revísalo todos los días!</li>
+                        <li><b>Biblioteca Digital:</b> Tu acceso a miles de libros y artículos de investigación. Úsala para tus trabajos.</li>
+                        <li><b>Correo Institucional:</b> La vía de comunicación oficial para becas, avisos y mensajes de profesores.</li>
+                    </ul>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="https://campusvirtual.uach.mx/" target="_blank" rel="noopener noreferrer" class="btn-primary" title="Edita este enlace para tu Campus Virtual">Campus Virtual</a>
+                        <a href="https://uach.mx/suba/biblioteca-digital/" target="_blank" rel="noopener noreferrer" class="btn-primary" title="Edita este enlace para tu Biblioteca">Biblioteca Digital</a>
+                        <a href="https://uach.mx/aspirantes/directorio/" target="_blank" rel="noopener noreferrer" class="btn-primary" title="Edita este enlace para tu Correo">Correo Institucional</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-sección: Habla con tus Profesores -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Cómo Comunicarte con tus Profesores</h2>
+                    <p class="text-lg text-gray-600 mb-6">Son tu primer contacto profesional y guías en tu carrera. Perderles el miedo es clave. Sigue estos consejos para escribir un correo:</p>
+                    <ol class="list-decimal list-inside space-y-3 text-gray-700">
+                        <li><b>Asunto Claro:</b> Ej. "Duda Tarea 2 - Juan Pérez - Cultura Digital".</li>
+                        <li><b>Identifícate:</b> Incluye tu nombre, materia y grupo. (¡Tienen cientos de estudiantes!)</li>
+                        <li><b>Sé Cortés y Claro:</b> "Estimado Profesor...", "Quisiera consultar...", "Agradezco su tiempo".</li>
+                        <li><b>Revisa ANTES de preguntar:</b> Asegúrate de que la respuesta no esté ya en el programa de la materia.</li>
+                    </ol>
+                    <p class="mt-6 text-lg text-gray-700 font-medium">Visita sus horas de tutoría. Preguntar dudas o pedir consejo puede abrirte muchas puertas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PÁGINA 3: VIDA EN EL CAMPUS ===== -->
+        <section id="page-campus" class="page-content hidden">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-8 border-b-4 border-secondary-DEFAULT pb-4">Vida en el Campus</h1>
+
+            <!-- Sub-sección: Actividades Extracurriculares -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">La Universidad es más que solo Salones</h2>
+                    <p class="text-lg text-gray-600 mb-6">Las mejores experiencias se encuentran fuera del aula. Involucrarte te ayuda a desarrollar habilidades, liberar estrés y construir tu red de contactos.</p>
+                    <ul class="space-y-3 text-lg text-gray-700 list-disc list-inside">
+                        <li><b>Clubes y Grupos Estudiantiles:</b> ¿Debate, anime, ajedrez, voluntariado? ¡Seguro hay un club para ti!</li>
+                        <li><b>Equipos Deportivos:</b> Ya sea en equipos representativos o torneos internos, mantenerte activo es fundamental.</li>
+                        <li><b>Eventos Culturales:</b> Asiste a conferencias, obras de teatro y talleres. Ampliarán tu visión del mundo.</li>
+                    </ul>
+                    <div class="mt-6">
+                        <a href="https://uach.mx/fing/clubes/" target="_blank" rel="noopener noreferrer" class="btn-secondary" title="Edita este enlace para Asuntos Estudiantiles">Ver Actividades</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-sección: Guía de Instalaciones -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Conoce tu Campus (Tu segundo hogar)</h2>
+                    <p class="text-lg text-gray-600 mb-6">Saber dónde están las cosas te ahorrará mucho tiempo. Ubica estos lugares clave:</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Lista de lugares -->
+                        <div>
+                            <ul class="space-y-4 text-gray-700">
+                                <li class="flex items-start">
+                                    <span class="text-secondary-DEFAULT font-bold mr-2">&#10003;</span>
+                                    <div><b>Biblioteca:</b> El mejor lugar para estudiar en silencio y con buen internet.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-secondary-DEFAULT font-bold mr-2">&#10003;</span>
+                                    <div><b>Centros de Cómputo:</b> Para usar equipos o imprimir tareas.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-secondary-DEFAULT font-bold mr-2">&#10003;</span>
+                                    <div><b>Cafeterías:</b> Identifica las que tienen buena comida y precios justos.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-secondary-DEFAULT font-bold mr-2">&#10003;</span>
+                                    <div><b>Oficinas Administrativas:</b> Control Escolar, Finanzas, Becas. Ubícalas *antes* de necesitarlas.</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Placeholder del Mapa -->
+                        <div>
+                            <div class="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-md">
+                                <img src="https://tse1.mm.bing.net/th/id/OIP.cuSnVo_-2qYJ2GNlT_q0QAHaGQ?rs=1&pid=ImgDetMain&o=7&rm=3" alt="Mapa del Campus" class="w-full h-full object-cover">
+                            </div>
+                            <!-- <p class="text-sm text-gray-500 mt-2 text-center">Inserta un Google Map o una imagen del mapa de tu campus.</p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PÁGINA 4: BIENESTAR Y CONSEJOS ===== -->
+        <section id="page-bienestar" class="page-content hidden">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-8 border-b-4 border-yellow-500 pb-4">Bienestar y Consejos</h1>
+
+            <!-- Sub-sección: Manejo del Tiempo -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">El Arte de No Dejarlo Todo para el Final</h2>
+                    <p class="text-lg text-gray-600 mb-6">En la universidad, tú eres responsable de tu tiempo. El secreto para tener vida social, dormir *y* aprobar es la organización.</p>
+                    <ul class="space-y-3 text-lg text-gray-700 list-disc list-inside mb-6">
+                        <li><b>Usa una Agenda (Digital o Física):</b> Anota *todo* (exámenes, tareas, clases).</li>
+                        <li><b>Prioriza tus Tareas:</b> Enfócate en lo "Importante pero no Urgente" para evitar el estrés.</li>
+                        <li><b>Establece Metas Pequeñas:</b> En lugar de "Estudiar para el examen", usa "Resumir capítulos 1 y 2".</li>
+                    </ul>
+                    <a href="https://docs.google.com/document/create" target="_blank" rel="noopener noreferrer" class="btn-primary bg-yellow-500 hover:bg-yellow-600" title="Crea una plantilla en Google Docs y pega el enlace aquí">Descargar Plantilla de Horario</a>
+                </div>
+            </div>
+
+            <!-- Sub-sección: Salud Mental -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Cuida tu Bienestar: No puedes servir de una jarra vacía</h2>
+                    <p class="text-lg text-gray-600 mb-6">El estrés universitario es real, pero manejable. Tu salud mental y física es la base de tu éxito.</p>
+                    <ul class="space-y-3 text-lg text-gray-700 list-disc list-inside mb-6">
+                        <li><b>Duerme:</b> Apunta a 7-8 horas. Es más efectivo que "estudiar" toda la noche.</li>
+                        <li><b>Muévete:</b> Salir a caminar 30 minutos reduce el estrés y libera endorfinas.</li>
+                        <li><b>Aliméntate Bien:</b> Evita depender solo de café. Tomar agua y comer balanceado impacta tu concentración.</li>
+                        <li><b>Pide Ayuda:</b> Sentirse abrumado es normal. Habla con amigos o busca apoyo psicológico. Es un acto de valentía.</li>
+                    </ul>
+                    <a href="https://uach.mx/fm/apoyo-psicologico/" target="_blank" rel="noopener noreferrer" class="btn-secondary" title="Edita este enlace para los servicios de apoyo de tu universidad">Buscar Apoyo Psicológico</a>
+                </div>
+            </div>
+
+            <!-- Sub-sección: Consejos de 'Veteranos' -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="p-6 md:p-8">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">5 Consejos de 'Veteranos' (Que nos hubiera gustado saber)</h2>
+                    <ol class="list-decimal list-outside space-y-4 text-lg text-gray-700 ml-5">
+                        <li><b>No faltes a clases (en serio):</b> Ir a clase te ahorra el 50% del tiempo de estudio y te mantiene al día.</li>
+                        <li><b>Guarda TODOS tus trabajos:</b> Crea carpetas en la nube para cada materia. Te servirán para finales y como portafolio.</li>
+                        <li><b>Pregunta (sin miedo):</b> Si tú tienes una duda, es probable que otros 10 también la tengan.</li>
+                        <li><b>Haz *un* amigo en cada clase:</b> Es tu red de apoyo para tareas, estudios o si faltaste un día.</li>
+                        <li><b>Cuida tu dinero:</b> Aprende a hacer un presupuesto. El dinero de estudiante es limitado y se va rápido.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- ==== FOOTER ==== -->
+    <footer class="bg-gray-800 text-gray-300 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+            <p>&copy; 2025 Guía de Supervivencia Universitaria.</p>
+            <p class="text-sm text-gray-400">Creado con fines académicos para la materia de Cultura Digital.</p>
+        </div>
+    </footer>
+
+
+    <!-- ==== JAVASCRIPT ==== -->
+    <script>
+        // --- Lógica para el Menú Móvil ---
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const iconOpen = document.getElementById('menu-icon-open');
+        const iconClose = document.getElementById('menu-icon-close');
+
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            iconOpen.classList.toggle('hidden');
+            iconClose.classList.toggle('hidden');
+            menuButton.setAttribute('aria-expanded', isOpen);
+        }
+
+        menuButton.addEventListener('click', toggleMenu);
+
+        // --- Lógica para Simular Navegación de Páginas ---
+        const pages = document.querySelectorAll('.page-content');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileNavLinks = document.querySelectorAll('.nav-link-mobile');
+
+        function showPage(pageId) {
+            // Ocultar todas las páginas
+            pages.forEach(page => {
+                page.classList.add('hidden');
+            });
+
+            // Mostrar la página seleccionada
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            }
+
+            // Actualizar estado activo en links de escritorio
+            navLinks.forEach(link => {
+                link.classList.remove('text-primary-DEFAULT', 'font-medium');
+                link.classList.add('text-gray-600');
+                if (link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.add('text-primary-DEFAULT', 'font-medium');
+                    link.classList.remove('text-gray-600');
+                }
+            });
+
+            // Actualizar estado activo en links de móvil
+            mobileNavLinks.forEach(link => {
+                link.classList.remove('text-primary-DEFAULT', 'font-medium');
+                link.classList.add('text-gray-600');
+                if (link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.add('text-primary-DEFAULT', 'font-medium');
+                    link.classList.remove('text-gray-600');
+                }
+            });
+
+            // Subir al inicio de la página
+            window.scrollTo(0, 0);
+        }
+
+        // --- Definición de Estilos de Botones (para no repetir en HTML) ---
+        // Se aplica a través de @apply en una hoja de estilos, pero aquí lo defino para referencia
+        // .btn-primary { @apply px-5 py-3 rounded-lg font-semibold text-white bg-primary-DEFAULT hover:bg-primary-hover transition-colors duration-200 inline-block; }
+        // .btn-secondary { @apply px-5 py-3 rounded-lg font-semibold text-white bg-secondary-DEFAULT hover:bg-secondary-hover transition-colors duration-200 inline-block; }
+        
+        // Como no podemos usar @apply en JS, añadiré una etiqueta <style> para estos botones
+    </script>
+
+    <!-- Estilos para botones reutilizables (ya que no podemos usar @apply) -->
+    <style>
+        .btn-primary {
+            display: inline-block;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: white;
+            background-color: #4f46e5; /* primary-DEFAULT */
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #4338ca; /* primary-hover */
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: white;
+            background-color: #10b981; /* secondary-DEFAULT */
+            transition: background-color 0.2s;
+        }
+        .btn-secondary:hover {
+            background-color: #059669; /* secondary-hover */
+        }
+    </style>
+
+</body>
+</html>
